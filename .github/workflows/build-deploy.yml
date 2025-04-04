@@ -38,7 +38,19 @@ jobs:
         run: |
           npm ci
           npm run build
-          mv dist public
+          # build
+          npm run build
+          
+          # navigate into the build output directory
+          cd dist
+          
+          # if you are deploying to a custom domain
+          # echo 'www.example.com' > CNAME
+          
+          git init
+          git add -A
+          git commit -m 'deploy'
+          cd -
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -47,7 +59,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: public
+          path: './dist'
 
       - name: Deploy to GitHub Pages
         id: deployment

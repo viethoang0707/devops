@@ -38,6 +38,9 @@ jobs:
         run: |
           npm ci
           npm run build
+          mv public public-vue
+          mv dist public
+          find public -type f -regex '.*\.\(htm\|html\|txt\|text\|js\|css\)$' -exec gzip -f -k {} \;
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -46,7 +49,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: './dist'
+          path: public
 
       - name: Deploy to GitHub Pages
         id: deployment

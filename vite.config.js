@@ -16,4 +16,8 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
+  build: {
+    outDir: 'dist',
+    assetsDir: './', // Đổi tên thư mục assets (mặc định là 'assets')
+  }
 })
